@@ -44,11 +44,11 @@ export class UserService {
     return this.http.post(this.BaseURI + '/Application/Register', body);
   }
 
-  login() {
-
+  login(formData) {
+    return this.http.post(this.BaseURI + '/Application/Login', formData);
   }
 
   getUserProfile() {
-
+    return this.http.get(this.BaseURI + '/UserProfile');
   }
 }
