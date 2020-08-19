@@ -9,6 +9,7 @@
         "Usuario",
         "caracteres",
         "corresponde",
+        "incorretos",
         "m",
         "mínimo",
         "necess",
@@ -19,6 +20,7 @@
         "obrigatório",
         "rio",
         "rios",
-        "succ"
+        "succ",
+        "toastr"
     ]
 }
