@@ -35,7 +35,13 @@ export class UserService {
   }
 
   register() {
-
+    var body = {
+      UserName: this.formModel.value.UserName,
+      Email: this.formModel.value.Email,
+      FullName: this.formModel.value.FullName,
+      Password: this.formModel.value.Passwords.Password
+    };
+    return this.http.post(this.BaseURI + '/Application/Register', body);
   }
 
   login() {
@@ -43,6 +49,6 @@ export class UserService {
   }
 
   getUserProfile() {
-    
+
   }
 }
