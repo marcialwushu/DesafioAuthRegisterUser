@@ -10,7 +10,7 @@ using WebLoginApplication.Models;
 namespace WebLoginApplication.Migrations
 {
     [DbContext(typeof(AuthenticationContext))]
-    [Migration("20200819021930_Setup")]
+    [Migration("20200819215107_Setup")]
     partial class Setup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
