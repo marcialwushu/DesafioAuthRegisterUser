@@ -101,10 +101,21 @@ namespace WebLoginApplication.Controllers
             return BadRequest(result); // 400
         }
 
+        // api/Application/resetpassword
         [HttpPost("ResetPassword")]
         public async Task<IActionResult> ResetPassword([FromForm]ResetPasswordViewModel model)
         {
+            if (ModelState.IsValid)
+            {
+                var result = await _userService.ResetPasswordAsync(model);
 
+                if (result.IsSuccess)
+                    return Ok(result);
+
+                return BadRequest(result);
+            }
+
+            return BadRequest("Algumas propriedades não são válidas");
         }
     }
 }
