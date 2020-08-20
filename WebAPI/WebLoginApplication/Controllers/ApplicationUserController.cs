@@ -10,6 +10,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using WebLoginApplication.Models;
+using WebLoginApplication.Services;
 
 namespace WebLoginApplication.Controllers
 {
@@ -19,12 +20,16 @@ namespace WebLoginApplication.Controllers
     {
         private string URL_API = "http://localhost:4200/";
 
+        private IUserService _userService;
+        private IMailService _mailService;
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _singInManager;
         private readonly ApplicationSettings _appSettings;
 
-        public ApplicationUserController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> singInManager, ApplicationSettings appSettings)
+        public ApplicationUserController(IUserService userService, IMailService mailService, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> singInManager, ApplicationSettings appSettings)
         {
+            _userService = userService;
+            _mailService = mailService;
             _userManager = userManager;
             _singInManager = singInManager;
             _appSettings = appSettings;
@@ -81,12 +86,25 @@ namespace WebLoginApplication.Controllers
         }
 
         // Esqueceu a senha 
+        // api/Application/forgetpassword
+        [HttpPost("ForgetPassword")]
         public async Task<IActionResult> ForgetPassword(string email)
         {
             if (string.IsNullOrEmpty(email))
                 return NotFound();
 
-            var result = await _
+            var result = await _userService.ForgetPasswordAsync(email);
+
+            if (result.IsSuccess)
+                return Ok(result); // 200
+
+            return BadRequest(result); // 400
+        }
+
+        [HttpPost("ResetPassword")]
+        public async Task<IActionResult> ResetPassword([FromForm]ResetPasswordViewModel model)
+        {
+
         }
     }
 }
