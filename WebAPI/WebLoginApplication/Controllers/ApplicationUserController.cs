@@ -81,32 +81,12 @@ namespace WebLoginApplication.Controllers
         }
 
         // Esqueceu a senha 
-        [HttpPost]
-        [AllowAnonymous]
-        [Route("ForgottenPassword")]
-        // POST api/Application/ForgottenPassword
-        public IActionResult ForgottenPassword([FromBody] ApplicationUserModel model)
+        public async Task<IActionResult> ForgetPassword(string email)
         {
-            try
-            {
-                var user = _userManager.FindByEmailAsync(model.Email);
+            if (string.IsNullOrEmpty(email))
+                return NotFound();
 
-                if(user == null)
-                {
-                    return BadRequest("Email não encontrado");
-                }
-
-                if (user != null)
-                {
-                    string Name = user.Email;
-                    string code =  _userManager.GeneratePasswordResetTokenAsync(user);
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        } 
+            var result = await _
+        }
     }
 }
