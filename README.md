@@ -13,6 +13,6 @@
 * [x] Metodo de autenticação 
 * [x] Metodo de registro de usuário
 * [x] Metodo de Recuperação 
-* [/] Fazer dupla autenticação, quando o usuário autenticar no sistema gerar um código com validade de 15 minutos para ser feita autenticação
+* [x] Fazer dupla autenticação, quando o usuário autenticar no sistema gerar um código com validade de 15 minutos para ser feita autenticação
 
 
