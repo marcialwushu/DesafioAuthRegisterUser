@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -16,6 +17,8 @@ namespace WebLoginApplication.Controllers
     [ApiController]
     public class ApplicationUserController : ControllerBase
     {
+        private string URL_API = "http://localhost:4200/";
+
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _singInManager;
         private readonly ApplicationSettings _appSettings;
@@ -76,5 +79,34 @@ namespace WebLoginApplication.Controllers
             else
                 return BadRequest(new { message = "Username ou password estão incorretos" });
         }
+
+        // Esqueceu a senha 
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("ForgottenPassword")]
+        // POST api/Application/ForgottenPassword
+        public IActionResult ForgottenPassword([FromBody] ApplicationUserModel model)
+        {
+            try
+            {
+                var user = _userManager.FindByEmailAsync(model.Email);
+
+                if(user == null)
+                {
+                    return BadRequest("Email não encontrado");
+                }
+
+                if (user != null)
+                {
+                    string Name = user.Email;
+                    string code =  _userManager.GeneratePasswordResetTokenAsync(user);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        } 
     }
 }
